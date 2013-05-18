@@ -1,4 +1,3 @@
-
 <?php
 	set_time_limit(0);
 	/**
@@ -280,20 +279,6 @@
 
 
 			echo 'var modbusdata = {day_elec:'.$fday_elec_json.',year_elec:'.$fyear_elec_json.',co2:'.$fco2_value_json.',fglv:'.$fglv_json.',temperature:'.$ftemperature_json.',humidity:'.$fhumidity_json.',sun_total:'.$fsun_total_json.',total_elec:'.$total_elec_json.',forset_cut:'.$forset_cut_json.',oil_save:'.$oil_save_json.'};db_write_modbus(modbusdata);';
-			
-//			echo "<br/>---------------------------------------<br/>";
-//			echo $fday_elec_json."<br/>".$fyear_elec_json."<br/>".$fco2_value_json."<br/>".$fglv_json;
-//
-//			echo "<br/>---------------------------------------<br/>";
-//			echo $ftemperature_json."<br/>".$fhumidity_json;
-//			echo "<br/>---------------------------------------<br/>";
-//			echo $fsun_total_json;
-//			echo "<br/>---------------------------------------<br/>";
-//			echo $total_elec_json."<br/>".$forset_cut_json."<br/>".$oil_save_json;
-
-
-			//这里输出从modbus主机获取的信息，并调用前端的js函数，把信息写到浏览器环境中全局变量中去
-//			echo 'var modbusdata = {elecity_data:'.json_encode($datea).'};db_write_modbus(modbusdata);';
 	}
 	 kycool_data();
 ?>
