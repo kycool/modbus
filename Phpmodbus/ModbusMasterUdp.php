@@ -4,7 +4,7 @@
  * @category Phpmodbus
  * @tutorial Phpmodbus.pkg 
  * @package Phpmodbus 
- * @version $id$
+ * @version 版本号更新2.0
  *  
  */
 
