@@ -1,12 +1,5 @@
 <?php
 /**
- * Phpmodbus Copyright (c) 2004, 2012 Jan Krakora
- *  
- * This source file is subject to the "PhpModbus license" that is bundled
- * with this package in the file license.txt.
- *   
- *
- * @copyright  Copyright (c) 2004, 2012 Jan Krakora
  * @license PhpModbus license 
  * @category Phpmodbus
  * @tutorial Phpmodbus.pkg 
