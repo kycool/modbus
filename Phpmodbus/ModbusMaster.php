@@ -11,9 +11,9 @@ class ModbusMaster {
   public $client = "";
   public $client_port = "502";
   public $status;
-  public $timeout_sec = 5; // Timeout 5 sec
-  public $endianness = 0; // Endianness codding (little endian == 0, big endian == 1) 
-  public $socket_protocol = "TCP"; // Socket protocol (TCP, UDP)
+  public $timeout_sec = 5; // 5秒超时
+  public $endianness = 0; 
+  public $socket_protocol = "TCP"; // Socket 协议 (TCP, UDP)
   
        
   function ModbusMaster($host, $protocol){
@@ -35,7 +35,6 @@ class ModbusMaster {
     } else {
         throw new Exception("Unknown socket protocol, should be 'TCP' or 'UDP'");
     }
-    // Bind the client socket to a specific local port
     if (strlen($this->client)>0){
         $result = socket_bind($this->sock, $this->client, $this->client_port);
         if ($result === false) {
@@ -45,7 +44,7 @@ class ModbusMaster {
             $this->status .= "Bound\n";
         }
     }
-    // Connect the socket
+    // 连接socket
     $result = @socket_connect($this->sock, $this->host, $this->port);
     if ($result === false) {
         throw new Exception("socket_connect() failed.</br>Reason: ($result)".
@@ -114,35 +113,13 @@ class ModbusMaster {
     }    
   }
   
-  /**
-   * readMultipleRegisters
-   *
-   * Modbus function FC 3(0x03) - Read Multiple Registers.
-   * 
-   * This function reads {@link $quantity} of Words (2 bytes) from reference 
-   * {@link $referenceRead} of a memory of a Modbus device given by 
-   * {@link $unitId}.
-   *    
-   *
-   * @param int $unitId usually ID of Modbus device 
-   * @param int $reference Reference in the device memory to read data (e.g. in device WAGO 750-841, memory MW0 starts at address 12288).
-   * @param int $quantity Amounth of the data to be read from device.
-   * @return false|Array Success flag or array of received data.
-   */
+
   function readMultipleRegisters($unitId, $reference, $quantity){
-    // connect
-    $this->connect();
-    // send FC 3    
+    $this->connect();   
     $packet = $this->readMultipleRegistersPacketBuilder($unitId, $reference, $quantity);
     $this->send($packet);
-    // receive response
-    $rpacket = $this->rec();
-    // parse packet    
+    $rpacket = $this->rec();  
     $receivedData = $this->readMultipleRegistersParser($rpacket);
-    // disconnect
-//    $this->disconnect();
-//    $this->status .= "readMultipleRegisters: DONE\n";
-    // return
     return $receivedData;
   }
 
@@ -158,7 +135,6 @@ class ModbusMaster {
   /**
    * fc3
    *
-   * Alias to {@link readMultipleRegisters} method.
    *
    * @param int $unitId
    * @param int $reference
@@ -172,7 +148,6 @@ class ModbusMaster {
   /**
    * readMultipleRegistersPacketBuilder
    *
-   * Packet FC 3 builder - read multiple registers
    *
    * @param int $unitId
    * @param int $reference
@@ -181,38 +156,37 @@ class ModbusMaster {
    */
   private function readMultipleRegistersPacketBuilder($unitId, $reference, $quantity){
     $dataLen = 0;
-    // build data section
     $buffer1 = "";
-    // build body
+    // 创建 body
     $buffer2 = "";
     $buffer2 .= iecType::iecBYTE(3);             // FC 3 = 3(0x03)
-    // build body - read section    
+    // 创建 body - 读区域    
     $buffer2 .= iecType::iecINT($reference);  // refnumber = 12288      
     $buffer2 .= iecType::iecINT($quantity);       // quantity
     $dataLen += 5;
-    // build header
+    // 创建 header
     $buffer3 = '';
 	$buffer3 .= iecType::iecINT(0);   // transaction ID
     $buffer3 .= iecType::iecINT(0);               // protocol ID
     $buffer3 .= iecType::iecINT($dataLen + 1);    // lenght
     $buffer3 .= iecType::iecBYTE($unitId);        //unit ID
-    // return packet string
+    // 返回包的 string
     return $buffer3. $buffer2. $buffer1;
   }
   
   /**
    * readMultipleRegistersParser
    *
-   * FC 3 response parser
+   * FC 3 回应分析器
    *
    * @param string $packet
    * @return array
    */
   private function readMultipleRegistersParser($packet){   
     $data = array();
-    // check Response code
+    // 验证 Response code
     $this->responseCode($packet);
-    // get data
+    // 取得
     for($i=0;$i<ord($packet[8]);$i++){
       $data[$i] = ord($packet[9+$i]);
     }    
@@ -222,7 +196,7 @@ class ModbusMaster {
   /**
    * byte2hex
    *
-   * Parse data and get it to the Hex form
+   * 解析数据并得到16进制的格式
    *
    * @param char $value
    * @return string
@@ -236,7 +210,7 @@ class ModbusMaster {
   /**
    * printPacket
    *
-   * Print a packet in the hex form
+   * 用16进制打印包
    *
    * @param string $packet
    * @return string
