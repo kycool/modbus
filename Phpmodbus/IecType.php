@@ -1,12 +1,12 @@
 <?php
 /**
- * Phpmodbus Copyright (c) 2004, 2010 Jan Krakora, WAGO Kontakttechnik GmbH & Co. KG (http://www.wago.com)
+ * Phpmodbus Copyright (c) 2004, 2010 Jan Krakora, WAGO Kontakttechnik GmbH & Co. KG 
  *
  * This source file is subject to the "PhpModbus license" that is bundled
  * with this package in the file license.txt.
  *
  * @author Jan Krakora
- * @copyright Copyright (c) 2004, 2010 Jan Krakora, WAGO Kontakttechnik GmbH & Co. KG (http://www.wago.com)
+ * @copyright Copyright (c) 2004, 2010 Jan Krakora, WAGO Kontakttechnik GmbH & Co. KG
  * @license PhpModbus license
  * @category Phpmodbus
  * @package Phpmodbus
