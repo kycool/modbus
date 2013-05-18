@@ -128,7 +128,8 @@
 	function  get_Bindata($data){
 		$result = decbin(hexdec($data));
 		switch(strlen($result)){
-			case 1:	return "000".$result;
+			case 1:	
+						return "000".$result;
 						break;
 			case 2:
 						return "00".$result;
