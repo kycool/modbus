@@ -10,28 +10,28 @@
  * @license PhpModbus license
  * @category Phpmodbus
  * @package Phpmodbus
- * @version $id$
+ * @ingternal kycool update
+ * @version 更新版本 版本号2.0
  */
 
 /**
  * IecType
  *
- * The class includes set of IEC-1131 data type functions that converts a PHP
- * data types to a IEC data type.
+ * 这个类包含了一系列相应的把PHP数据类型转换为IEC-1131 数据类型
  *
- * @author Jan Krakora
- * @copyright  Copyright (c) 2004, 2010 Jan Krakora, WAGO Kontakttechnik GmbH & Co. KG (http://www.wago.com)
+ * @author Jan Krakora  
  * @package Phpmodbus
+ * @internal  kycool update
  */
 class IecType {
 
     /**
      * iecBYTE
      *
-     * Converts a value to IEC-1131 BYTE data type
+     * 转换数据为 IEC-1131 BYTE 类型
      *
-     * @param value value from 0 to 255
-     * @return value IEC BYTE data type
+     * @param value value 范围【0-255】
+     * @return value IEC BYTE 类型
      *
      */
     public static function iecBYTE($value) {
@@ -41,10 +41,10 @@ class IecType {
     /**
      * iecINT
      *
-     * Converts a value to IEC-1131 INT data type
+     * 转换数据为 to IEC-1131 INT 数据类型
      *
-     * @param value value to be converted
-     * @return value IEC-1131 INT data type
+     * @param value value 
+     * @return value IEC-1131 INT 类型
      *
      */
     public static function iecINT($value) {
@@ -55,59 +55,50 @@ class IecType {
     /**
      * iecDINT
      *
-     * Converts a value to IEC-1131 DINT data type
+     * 转换数据为 IEC-1131 DINT 数据类型
      *
-     * @param value value to be converted
-     * @param value endianness defines endian codding (little endian == 0, big endian == 1)
-     * @return value IEC-1131 INT data type
+     * @param value value 
+     * @param value endianness 
+     * @return value IEC-1131 DINT类型
      *
      */
     public static function iecDINT($value, $endianness = 0) {
-        // result with right endianness
         return self::endianness($value, $endianness);
     }
 
     /**
      * iecREAL
      *
-     * Converts a value to IEC-1131 REAL data type. The function uses function  @use float2iecReal.
+     * 把数据转换为 IEC-1131 real 数据类型
      *
-     * @param value value to be converted
-     * @param value endianness defines endian codding (little endian == 0, big endian == 1)
-     * @return value IEC-1131 REAL data type
+     * @param value value 
+     * @param value endianness 
+     * @return value IEC-1131 real 类型
      */
     public static function iecREAL($value, $endianness = 0) {
-        // iecREAL representation
         $real = self::float2iecReal($value);
-        // result with right endianness
         return self::endianness($real, $endianness);
     }
 
     /**
      * float2iecReal
      *
-     * This function converts float value to IEC-1131 REAL single precision form.
+     * 浮点型数据转换为 IEC-1131 数据格式
      *
-     * For more see [{@link http://en.wikipedia.org/wiki/Single_precision Single precision on Wiki}] or
-     * [{@link http://de.php.net/manual/en/function.base-convert.php PHP base_convert function commentary}, Todd Stokes @ Georgia Tech 21-Nov-2007] or
-     * [{@link http://www.php.net/manual/en/function.pack.php PHP pack/unpack functionality}]
      *
-     * @param float value to be converted
-     * @return value IEC REAL data type
+     * @param float value 
+     * @return value IEC 
      */
     private static function float2iecReal($value) {
-        // get float binary string
         $float = pack("f", $value);
-        // set 32-bit unsigned integer of the float
         $w = unpack("L", $float);
         return $w[1];
     }
 
     /**
-     * endianness
-     *
-     * Make endianess as required.
-     * For more see http://en.wikipedia.org/wiki/Endianness
+     *endianness
+     * 
+     * 字节顺序
      *
      * @param int $value
      * @param bool $endianness
