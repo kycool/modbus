@@ -1,17 +1,11 @@
 <?php
 /**
- * Phpmodbus Copyright (c) 2004, 2012 Jan Krakora
  *  
- * This source file is subject to the "PhpModbus license" that is bundled
- * with this package in the file license.txt.
- *   
- *
- * @copyright  Copyright (c) 2004, 2012 Jan Krakora
  * @license PhpModbus license 
  * @category Phpmodbus
  * @tutorial Phpmodbus.pkg 
  * @package Phpmodbus 
- * @version $id$
+ * @version  版本号2.0
  *  
  */
 
@@ -20,16 +14,17 @@ require_once dirname(__FILE__) . '/ModbusMaster.php';
 /**
  * ModbusMasterTcp
  *
- * This class deals with the MODBUS master using TCP. Extends ModbusMaster class.
- *  
- * Implemented MODBUS functions:
- *   - FC  1: read coils
- *   - FC  3: read multiple registers
- *   - FC 15: write multiple coils 
- *   - FC 16: write multiple registers
- *   - FC 23: read write registers
+ *  这个类使用TCP处理MODBUS，继承ModbusMaster类
+ * 
+ *  抽象方法列表：
+ *   - FC  1: 读线圈
+ *   - FC  3: 读取多个寄存器
+ *   - FC 15: 写多个线圈
+ *   - FC 16: 写多个寄存器
+ *   - FC 23: 读写寄存器
  *   
  * @author Jan Krakora
+ * @internal kycool update
  * @copyright  Copyright (c) 2004, 2012 Jan Krakora
  * @package Phpmodbus  
  *
@@ -38,9 +33,9 @@ class ModbusMasterTcp extends ModbusMaster {
   /**
    * ModbusMasterTcp
    *
-   * This is the constructor that defines {@link $host} IP address of the object. 
+   * 构造函数. 
    *     
-   * @param String $host An IP address of a Modbus TCP device. E.g. "192.168.1.1".
+   * @param String $host Modbus TCP 设备的IP地址. 例如 "192.168.1.1".
    */         
   function ModbusMasterTcp($host){
     $this->host = $host;
