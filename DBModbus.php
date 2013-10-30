@@ -280,6 +280,7 @@
 
 
 			echo 'var modbusdata = {day_elec:'.$fday_elec_json.',year_elec:'.$fyear_elec_json.',co2:'.$fco2_value_json.',fglv:'.$fglv_json.',temperature:'.$ftemperature_json.',humidity:'.$fhumidity_json.',sun_total:'.$fsun_total_json.',total_elec:'.$total_elec_json.',forset_cut:'.$forset_cut_json.',oil_save:'.$oil_save_json.'};db_write_modbus(modbusdata);';
+			//最后输出到前端调用
 	}
 	 kycool_data();
 ?>
